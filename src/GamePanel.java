@@ -44,7 +44,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		repaint();
-		
+		  if(currentState == MENU_STATE){
+
+              
+
+      }else if(currentState == GAME_STATE){
+
+
+      }else if(currentState == END_STATE){
+
+
+      }
+
+
 	}
 
 	@Override
