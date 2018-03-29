@@ -15,12 +15,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
-	 Font titleFont;
-	 Rocketship ship= new Rocketship(250,700,50,50);
+	Font titleFont;
+	Rocketship ship = new Rocketship(250, 700, 50, 50);
+	ObjectManager manager = new ObjectManager(ship);
 
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
-		titleFont= new Font("Arial",Font.PLAIN,48);
+		titleFont = new Font("Arial", Font.PLAIN, 48);
 	}
 
 	void startGame() {
@@ -29,7 +30,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.fillRect(0, 0, 500, 800);   
+		g.fillRect(0, 0, 500, 800);
 		g.setFont(titleFont);
 		g.setColor(Color.WHITE);
 		g.drawString("League Invaders", 100, 100);
@@ -38,13 +39,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 500, 800);   
-		ship.draw(g);	
+		g.fillRect(0, 0, 500, 800);
+		ship.draw(g);
+		manager.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
-		g.fillRect(0, 0, 500, 800);  
+		g.fillRect(0, 0, 500, 800);
 		g.setFont(titleFont);
 		g.setColor(Color.WHITE);
 		g.drawString("Game OVER", 100, 100);
@@ -56,7 +58,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-	
+
 	}
 
 	void updateEndState() {
@@ -90,23 +92,33 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			currentState++;
-			if(currentState > END_STATE){
-                currentState = MENU_STATE;
-        }
+			if (currentState > END_STATE) {
+				currentState = MENU_STATE;
+			}
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			ship.x += 5;
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			ship.x -= 5;
+		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+			ship.y -= 5;
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			ship.y += 5;
+		} else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			manager.addProjectile(new Projectile(ship.x + 20, ship.y + 20, 10, 10));
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
