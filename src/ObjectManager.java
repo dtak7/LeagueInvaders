@@ -46,6 +46,21 @@ public class ObjectManager {
 		aliens.add(a);
 	}
 
+	void checkCollision() {
+		for (Alien a : aliens) {
+			if (ship.collisionBox.intersects(a.collisionBox)) {
+				ship.isAlive = false;
+
+			}
+
+			for (Projectile p : projectiles) {
+				if (a.collisionBox.intersects(p.collisionBox)) {
+					a.isAlive = false;
+				}
+			}
+		}
+	}
+
 	public void manageEnemies() {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
 			addAlien(new Alien(new Random().nextInt(500), 0, 50, 50));
@@ -56,7 +71,9 @@ public class ObjectManager {
 
 	void purgeObjects() {
 		for (int i = 0; i < aliens.size(); i++) {
-
+			if(aliens.get(i).isAlive==false) {
+			aliens.remove(aliens.get(i));
 		}
 	}
+}
 }

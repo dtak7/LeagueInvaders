@@ -11,7 +11,7 @@ public class Rocketship extends GameObject implements KeyListener {
 	}
 
 	void update() {
-
+		super.update();
 	}
 
 	void draw(Graphics g) {
