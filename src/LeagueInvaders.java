@@ -5,8 +5,8 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
 public class LeagueInvaders implements KeyListener {
-	final int frameHeight = 800;
-	final int frameWidth = 500;
+	static final int frameHeight = 800;
+	static final int frameWidth = 500;
 	JFrame frame;
 	GamePanel game;
 
